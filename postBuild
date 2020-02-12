@@ -6,9 +6,4 @@ tar -zxf biodynamo_5c33ca4.tar.gz -C $HOME/biodynamo
 
 source $HOME/biodynamo/bin/thisbdm.sh
 
-mkdir -p $HOME/.ipython/kernels
-cp -r $ROOTSYS/etc/notebook/kernels/root $HOME/.ipython/kernels
-mkdir -p $HOME/.ipython/profile_default/static
-cp -r $ROOTSYS/etc/notebook/custom $HOME/.ipython/profile_default/static
-
 exec "$@"
