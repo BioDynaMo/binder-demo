@@ -1,0 +1,10 @@
+wget
+cmake
+make
+gcc
+g++
+libopenmpi-dev
+libomp-dev
+libnuma-dev
+libtbb-dev
+libpthread-stubs0-dev
