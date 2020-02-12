@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "Downloading and extracting BioDynaMo..."
 wget -q http://cern.ch/biodynamo-lfs/biodynamo_5c33ca4.tar.gz
 mkdir -p $HOME/biodynamo
 tar -zxf biodynamo_5c33ca4.tar.gz -C $HOME/biodynamo
