@@ -1,3 +1,4 @@
 dependencies:
   - python=3.6.9
   - root
+  - openmp
