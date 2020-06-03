@@ -1,9 +1,9 @@
 #!/bin/bash
 
 echo "Downloading and extracting BioDynaMo..."
-BDM_VERSION=f0d5661
-wget -q http://cern.ch/biodynamo-lfs/biodynamo_$BDM_VERSION.tar.gz
+BDM_VERSION=v0.1.0
+wget -q http://cern.ch/biodynamo-lfs/biodynamo-$BDM_VERSION.tar.gz
 mkdir -p $HOME/biodynamo
-tar -zxf biodynamo_$BDM_VERSION.tar.gz -C $HOME/biodynamo
+tar -zxf biodynamo-$BDM_VERSION.tar.gz -C $HOME/biodynamo
 
 exec "$@"
