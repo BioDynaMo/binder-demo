@@ -1,41 +1,28 @@
-
 FROM ubuntu:18.04
 
-# man required by ROOT
+# Install prerequisites for BioDynaMo
 RUN apt-get update && apt-get install -y \
-  git \
   sudo \
-  man \
-  software-properties-common \
-  wget \
-  xvfb \
   wget \
   libopenmpi-dev \
   libomp-dev \
   libnuma-dev \
   libtbb-dev \
   libpthread-stubs0-dev \
-  curl \ 
-  nodejs \
-  yarn \
-  npm
+  curl
 
 RUN if ! [ -L /etc/localtime ]; then \
       sudo ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime; \
     fi
 
-RUN apt-get -y update
-RUN apt-get install -y build-essential python3.6 python3-pip python3-dev
-RUN pip3 install --no-cache-dir notebook==5.*
-RUN pip3 install jupyter 
-RUN npm install -g requirejs 
+RUN apt -y update
+RUN apt install -y build-essential python3.8 python3.8-dev python3-pip
+RUN python3.8 -m pip install --no-cache-dir notebook==5.*
+RUN python3.8 -m pip install jupyter metakernel
 
-ARG BDM_VERSION=v0.1.0 
+# Install BioDynaMo
+ARG BDM_VERSION=v0.1.0
 RUN wget "http://cern.ch/biodynamo-lfs/biodynamo-$BDM_VERSION.tar.gz"
 RUN mkdir -p /opt/biodynamo 
-RUN tar -zxf biodynamo-${BDM_VERSION}.tar.gz -C /opt/biodynamo 
-
-
-
-
-
+RUN tar -zxf biodynamo-${BDM_VERSION}.tar.gz -C /opt/biodynamo
+RUN rm biodynamo-${BDM_VERSION}.tar.gz 

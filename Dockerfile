@@ -1,4 +1,5 @@
 FROM biodynamo/notebooks:latest
+
 ARG NB_USER=jovyan
 ARG NB_UID=1000
 ENV USER ${NB_USER}
@@ -12,10 +13,14 @@ RUN adduser --disabled-password \
 
 # Make sure the contents of our repo are in ${HOME}
 COPY . ${HOME}
+
+# Copy source script and set permissions
+COPY ./start.sh /
+RUN ["chmod", "+x", "/start.sh"]
+
 USER root
 RUN chown -R ${NB_UID} ${HOME}
-RUN chown -R ${NB_UID} /opt
+RUN chown -R ${NB_UID} /opt/biodynamo
 USER ${NB_USER}
 
-RUN ["/bin/bash", "-c", "source /opt/biodynamo/bin/binder_thisbdm.sh"]
-RUN ["/bin/bash", "-c", "source /opt/biodynamo/third_party/root/bin/thisroot.sh"]
+ENTRYPOINT ["/start.sh"]
