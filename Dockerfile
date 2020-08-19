@@ -13,6 +13,8 @@ RUN adduser --disabled-password \
 # Make sure the contents of our repo are in ${HOME}
 COPY . ${HOME}
 USER root
-RUN chown -R ${NB_UID} ${HOME}
+RUN chown -R ${NB_UID} /opt
 USER ${NB_USER}
 
+RUN ["/bin/bash", "-c", "source /opt/biodynamo/bin/binder_thisbdm.sh"]
+RUN ["/bin/bash", "-c", "source /opt/biodynamo/third_party/root/bin/thisroot.sh"]
