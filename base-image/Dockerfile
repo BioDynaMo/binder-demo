@@ -18,7 +18,7 @@ RUN if ! [ -L /etc/localtime ]; then \
 RUN apt -y update
 RUN apt install -y build-essential python3.8 python3.8-dev python3-pip
 RUN python3.8 -m pip install --no-cache-dir notebook==5.*
-RUN python3.8 -m pip install jupyter metakernel
+RUN python3.8 -m pip install jupyter metakernel jupyterlab
 
 # Install BioDynaMo
 ARG BDM_VERSION=v0.1.0
