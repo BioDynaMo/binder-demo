@@ -24,8 +24,8 @@ RUN ["chmod", "+x", "/start.sh"]
 COPY ./jupyter_notebook_config.py ${HOME}/.jupyter/jupyter_notebook_config.py
 
 USER root
-# RUN sudo adduser ${NB_USER} sudo
-# RUN echo "${NB_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+RUN sudo adduser ${NB_USER} sudo
+RUN echo "${NB_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN chown -R ${NB_UID} ${HOME}
 RUN chown -R ${NB_UID} /opt/biodynamo/bin
 USER ${NB_USER}
