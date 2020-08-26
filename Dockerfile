@@ -11,15 +11,6 @@ RUN adduser --disabled-password \
     --uid ${NB_UID} \
     ${NB_USER}
 
-# Make sure the contents of our repo are in ${HOME}
-
-RUN mkdir -p ${HOME}/notebooks
-
-# Copy the generated html notebooks into the static folder
-RUN for d in /opt/biodynamo/notebooks/*  ; do \
-    cp -v $d/*.ipynb ${HOME}/notebooks/ ;\
-    done 
-
 # Copy source script and set permissions
 COPY ./start.sh /
 RUN ["chmod", "+x", "/start.sh"]
@@ -30,6 +21,21 @@ RUN ["chmod", "+x", "/start.sh"]
 COPY ./jupyter_notebook_config.py ${HOME}/.jupyter/jupyter_notebook_config.py
 
 USER root
+
+# Copy the notebooks 
+RUN mkdir -p ${HOME}/notebooks
+RUN for d in /opt/biodynamo/notebooks/*  ; do \
+        dl=$(basename $d); \
+        mkdir -p ${HOME}/notebooks/$dl ;\
+        cp -v $d/*.ipynb ${HOME}/notebooks/$dl ; \
+        for l in $d/*.h ; do \
+            ll=$(basename $l); \
+            if [ $ll != $dl.h ]; then \
+                cp -v $l ${HOME}/notebooks/$dl ; \
+            fi ;\
+        done; \
+    done 
+
 RUN sudo adduser ${NB_USER} sudo
 RUN echo "${NB_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN chown -R ${NB_UID} ${HOME}
