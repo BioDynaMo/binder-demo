@@ -12,7 +12,13 @@ RUN adduser --disabled-password \
     ${NB_USER}
 
 # Make sure the contents of our repo are in ${HOME}
-COPY . ${HOME}
+
+RUN mkdir -p ${HOME}/notebooks
+
+# Copy the generated html notebooks into the static folder
+RUN for d in /opt/biodynamo/notebooks/*  ; do \
+    cp -v $d/*.ipynb ${HOME}/notebooks/ ;\
+    done 
 
 # Copy source script and set permissions
 COPY ./start.sh /
@@ -30,4 +36,5 @@ RUN chown -R ${NB_UID} ${HOME}
 RUN chown -R ${NB_UID} /opt/biodynamo/bin
 USER ${NB_USER}
 
+WORKDIR ${HOME}/notebooks
 ENTRYPOINT ["/start.sh"]
