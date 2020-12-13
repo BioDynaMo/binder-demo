@@ -21,7 +21,7 @@ RUN python3.8 -m pip install --no-cache-dir notebook==5.*
 RUN python3.8 -m pip install jupyter metakernel jupyterlab
 
 # Install BioDynaMo
-ARG BDM_VERSION=v0.1.0
+ARG BDM_VERSION=v0.9.21
 RUN wget "http://cern.ch/biodynamo-lfs/biodynamo-$BDM_VERSION.tar.gz"
 RUN mkdir -p /opt/biodynamo 
 RUN tar -zxf biodynamo-${BDM_VERSION}.tar.gz -C /opt/biodynamo
