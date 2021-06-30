@@ -1,5 +1,11 @@
 FROM ubuntu:20.04
 
+
+ENV TZ=Europe/Berlin
+
+RUN if ! [ -L /etc/localtime ]; then \
+      ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime; \
+    fi
 # Install prerequisites for BioDynaMo
 RUN apt-get update && apt-get install -y --no-install-recommends \
   sudo \
