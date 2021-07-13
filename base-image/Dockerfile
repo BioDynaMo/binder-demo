@@ -18,7 +18,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   curl \ 
   git \
   make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget ca-certificates curl llvm libncurses5-dev \
-  ninja-build
+  ninja-build\
+  libffi-dev
 
 RUN if ! [ -L /etc/localtime ]; then \
       sudo ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime; \
@@ -28,8 +29,6 @@ RUN apt -y update
 RUN apt install -y build-essential python3.8 python3.8-dev python3-pip
 
 
-RUN python3.8 -m pip install --no-cache-dir notebook==5.*
-RUN python3.8 -m pip install jupyter metakernel jupyterlab
 
 
 # RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
@@ -72,10 +71,16 @@ RUN PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.9.1 && pyenv global 
 
 RUN pyenv global 3.9.1
 RUN pyenv local 3.9.1
+
+
+RUN python -m pip install --no-cache-dir notebook==5.*
+RUN python -m pip install jupyter metakernel jupyterlab
+
 RUN cmake -G Ninja \
     -Dparaview=ON \
     -DCMAKE_BUILD_TYPE=Release \
-    -B build
+    -B build\
+    -Dnotebooks=ON
 RUN cmake --build build --parallel --config Release
 
 
@@ -85,7 +90,7 @@ SHELL ["/bin/bash", "-c", "source /build_dir/biodynamo/build/bin/thisbdm.sh"]
 ENV DISPLAY=:99.0
 RUN ninja run-unit-tests
 
-
+ENTRYPOINT ["tail",  "-f", "/build_dir/biodynamo/build/bin/thisbdm.sh"]
 
 
 
