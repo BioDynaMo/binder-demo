@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
 
-source /opt/biodynamo/bin/binder_thisbdm.sh
+source ${HOME}/biodynamo/build/bin/thisbdm.sh
 
 exec "$@"
