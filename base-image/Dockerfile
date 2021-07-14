@@ -26,7 +26,7 @@ RUN if ! [ -L /etc/localtime ]; then \
     fi
 
 RUN apt -y update
-RUN apt install -y build-essential python3.8 python3.8-dev python3-pip
+# RUN apt install -y build-essential python3.8 python3.8-dev python3-pip
 
 
 
@@ -73,8 +73,8 @@ RUN pyenv global 3.9.1
 RUN pyenv local 3.9.1
 
 
-RUN python -m pip install --no-cache-dir notebook==5.*
-RUN python -m pip install jupyter metakernel jupyterlab
+RUN python -m pip install --no-cache-dir notebook==5.* --user
+RUN python -m pip install jupyter metakernel jupyterlab ipykernel --user
 
 RUN cmake -G Ninja \
     -Dparaview=ON \
