@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
 
-source ${HOME}/biodynamo/build/bin/thisbdm.sh
+source /build_dir/biodynamo/build/bin/thisbdm.sh
 
 exec "$@"
