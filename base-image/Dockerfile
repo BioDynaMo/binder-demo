@@ -76,7 +76,7 @@ RUN pyenv local 3.9.1
 
 RUN python -m pip install --no-cache-dir notebook==5.*
 RUN python -m pip install jupyter metakernel jupyterlab ipykernel 
-RUN source ./prerequisites.sh all
+RUN ./prerequisites.sh all
 
 RUN cmake -G Ninja \
     -Dparaview=ON \
