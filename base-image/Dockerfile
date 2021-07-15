@@ -19,7 +19,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   git \
   make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget ca-certificates curl llvm libncurses5-dev \
   ninja-build\
-  libffi-dev
+  libffi-dev\
+  bsdmainutils
 
 RUN if ! [ -L /etc/localtime ]; then \
       sudo ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime; \
