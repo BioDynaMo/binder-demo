@@ -89,7 +89,7 @@ RUN cmake --build build --parallel --config Release
 
 WORKDIR /build_dir/biodynamo/build
 # RUN . bin/thisbdm.sh
-SHELL ["/bin/bash", "-c", "source /build_dir/biodynamo/build/bin/thisbdm.sh"]
+RUN ["/bin/bash", "-c", "source /build_dir/biodynamo/build/bin/thisbdm.sh"]
 ENV DISPLAY=:99.0
 RUN ninja run-unit-tests
 
