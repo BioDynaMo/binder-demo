@@ -40,6 +40,11 @@ RUN for d in ${BUILD_HOME}/biodynamo/notebooks/*  ; do \
     done 
 
 
+RUN sudo adduser ${NB_USER} sudo
+RUN echo "${NB_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+RUN chown -R ${NB_UID} ${HOME}
+RUN chown -R ${NB_UID} ${BUILD_HOME}/biodynamo/bin
+USER ${NB_USER}
 
 WORKDIR ${HOME}/notebooks
 # ENTRYPOINT ["tail",  "-f", "/start.sh"]
