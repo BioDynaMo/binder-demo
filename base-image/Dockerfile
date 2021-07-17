@@ -75,7 +75,7 @@ RUN pyenv global 3.9.1
 RUN pyenv local 3.9.1
 
 
-RUN python -m pip install --no-cache-dir notebook==5.*
+RUN python -m pip install --no-cache-dir notebook==6.*
 RUN python -m pip install jupyter metakernel jupyterlab ipykernel 
 
 
