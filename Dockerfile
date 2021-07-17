@@ -41,6 +41,6 @@ RUN for d in ${BUILD_HOME}/biodynamo/notebooks/*  ; do \
 
 
 
-# WORKDIR ${HOME}/notebooks
-ENTRYPOINT ["tail",  "-f", "/start.sh"]
-# ENTRYPOINT ["bash","/start.sh"]
+WORKDIR ${HOME}/notebooks
+# ENTRYPOINT ["tail",  "-f", "/start.sh"]
+ENTRYPOINT ["bash","/start.sh"]
