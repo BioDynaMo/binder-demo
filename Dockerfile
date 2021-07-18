@@ -2,17 +2,17 @@ FROM biodynamo/notebooks:latest
 
 ARG NB_USER=jovyan
 ARG NB_UID=1000
-ENV USER ${NB_USER}
-ENV NB_UID ${NB_UID}
-ENV HOME /home/${NB_USER}
+ENV USER jovyan
+ENV NB_UID 1000
+ENV HOME /home/jovyan
 
 
 ENV BUILD_HOME /build_dir
 
 RUN adduser --disabled-password \
     --gecos "Default user" \
-    --uid ${NB_UID} \
-    ${NB_USER}
+    --uid 1000 \
+    jovyan
 
 # Copy source script and set permissions
 COPY ./start.sh /
@@ -40,11 +40,11 @@ RUN for d in ${BUILD_HOME}/biodynamo/notebooks/*  ; do \
     done 
 
 
-RUN sudo adduser ${NB_USER} sudo
-RUN echo "${NB_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-RUN chown -R ${NB_UID} ${HOME}
-RUN chown -R ${NB_UID} ${BUILD_HOME}/biodynamo/bin
-USER ${NB_USER}
+RUN sudo adduser jovyan sudo
+RUN echo "jovyan ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+RUN chown -R 1000 ${HOME}
+RUN chown -R 1000 ${BUILD_HOME}/biodynamo/bin
+USER jovyan
 
 WORKDIR ${HOME}/notebooks
 # ENTRYPOINT ["tail",  "-f", "/start.sh"]
