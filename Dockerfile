@@ -27,7 +27,7 @@ COPY ./jupyter_notebook_config.py ${HOME}/.jupyter/jupyter_notebook_config.py
 # USER root
 
 # Copy the notebooks 
-RUN mkdir -p ${HOME}/notebooks
+RUN mkdir -p ${HOME}/notebook
 RUN cp -R ${BUILD_HOME}/biodynamo/notebook ${HOME}/notebook
 # RUN for d in ${BUILD_HOME}/biodynamo/notebooks/*  ; do \
 #         dl=$(basename $d); \
@@ -71,7 +71,7 @@ RUN find /build_dir/.pyenv/versions/3.9.1/share/jupyter/ -type f -perm -100 -exe
 
 USER jovyan
 
-WORKDIR ${HOME}/notebooks
+WORKDIR ${HOME}/notebook
 # WORKDIR ${HOME}/notebooks
 # ENTRYPOINT ["tail",  "-f", "/start.sh"]
 ENTRYPOINT ["bash","/start.sh"]
