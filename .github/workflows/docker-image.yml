@@ -16,4 +16,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build ./base-image/ --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file ./base-image/Dockerfile --tag biodynamo-base:$(date +%s)
