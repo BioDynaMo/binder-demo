@@ -93,7 +93,8 @@ WORKDIR /build_dir/biodynamo/build
 # ENV DISPLAY=:99.0
 # RUN ninja run-unit-tests
 
-# ENTRYPOINT ["tail",  "-f", "/build_dir/biodynamo/build/bin/thisbdm.sh"]
+# RUN  ["/bin/bash", "-c", "source /build_dir/biodynamo/build/bin/thisbdm.sh"]
+ENTRYPOINT ["/bin/bash", "-c", "source /build_dir/biodynamo/build/bin/thisbdm.sh && /bin/bash"]
 
 
 
