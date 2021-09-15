@@ -14,6 +14,8 @@ jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    outputs: 
+      docker_tag: ${{ steps.meta.outputs.tags }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
@@ -48,7 +50,7 @@ jobs:
         fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
     - name: Create local changes
       run: |
-        sed -i "1s/.*/FROM biodynamo\/notebooks:${{ steps.meta.outputs.tags }}/" ./Dockerfile    
+        sed -i "1s/.*/FROM biodynamo\/notebooks:${{ needs.push_to_registry.outputs.docker_tag }}/" ./Dockerfile    
     - name: Commit files
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
