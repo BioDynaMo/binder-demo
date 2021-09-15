@@ -38,6 +38,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
   update_notebooks_dockerfile:
+    needs: push_to_registry
     name: Update Notebooks Docker file tag
     runs-on: ubuntu-latest
     steps:
@@ -47,7 +48,7 @@ jobs:
         fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
     - name: Create local changes
       run: |
-        sed -i "1s/.*/${{ steps.meta.outputs.tags }}/" ./Dockerfile    
+        sed -i "1s/.*/FROM biodynamo/notebooks:${{ steps.meta.outputs.tags }}/" ./Dockerfile    
     - name: Commit files
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
