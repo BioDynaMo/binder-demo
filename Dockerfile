@@ -1,4 +1,4 @@
-FROM biodynamo/notebooks:latest
+
 
 ARG NB_USER=jovyan
 ARG NB_UID=1000
