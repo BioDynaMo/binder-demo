@@ -39,7 +39,7 @@ jobs:
         with:
           context: ./base-image/
           push: true
-          tags: ${{ steps.meta.outputs.sha }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
   update_notebooks_dockerfile:
     needs: push_to_registry
