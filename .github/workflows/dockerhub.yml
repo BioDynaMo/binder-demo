@@ -15,7 +15,7 @@ jobs:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     outputs: 
-      docker_tag: ${{ steps.meta.outputs.tags }}
+      docker_tag: ${{ steps.meta.outputs.sha }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
