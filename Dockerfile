@@ -28,7 +28,7 @@ COPY ./jupyter_notebook_config.py ${HOME}/.jupyter/jupyter_notebook_config.py
 # Copy the notebooks 
 RUN mkdir -p ${HOME}/notebook
 RUN cp -R ${BUILD_HOME}/biodynamo/notebook ${HOME}/notebook
-
+RUN cp -R ${BUILD_HOME}/biodynamo/demo ${HOME}/demo
 
 RUN sudo adduser jovyan sudo
 RUN echo "jovyan ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
