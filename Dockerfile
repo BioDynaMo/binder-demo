@@ -47,7 +47,7 @@ RUN find /build_dir/.pyenv/versions/3.9.1/share/jupyter/ -type f -perm -100 -exe
 
 USER jovyan
 
-WORKDIR ${HOME}/notebook
+WORKDIR ${HOME}
 # WORKDIR ${HOME}/notebooks
 # ENTRYPOINT ["tail",  "-f", "/start.sh"]
 ENTRYPOINT ["bash","/start.sh"]
